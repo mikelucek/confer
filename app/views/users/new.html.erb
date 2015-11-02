@@ -1,0 +1,7 @@
+<h2> Sign up </h2>
+
+<%= form_for @user do |x| %>
+<%= x.text_field :phone, :placeholder => "Phone number" %>
+<%= x.text_field :email, :placeholder => "Email address" %>
+<%= x.submit :signup %>
+<% end %>
