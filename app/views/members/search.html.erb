@@ -1,0 +1,9 @@
+<h1> Search for a conference </h1>
+
+topic or city. or both.
+
+<%= form_tag("/members-results", method: "get") do %>
+<%= text_field_tag(:place, '', :placeholder => "location") %>
+<%= text_field_tag(:topic,'', :placeholder => "topic") %>
+<%= submit_tag("Search") %>
+<% end %>

@@ -1,0 +1,7 @@
+<h1> Sign In </h1>
+
+<%= form_tag("/create", method: "get") do %>
+<%= text_field_tag(:phone, '', :placeholder => "sign in with your phone") %>
+<%= text_field_tag(:pin,'', :placeholder => "enter your PIN") %>
+<%= submit_tag("Log In") %>
+<% end %>

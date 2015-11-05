@@ -14,13 +14,28 @@ class UsersController < ApplicationController
 		#attempt to send txt to the user
 		#on success, save phone and pin to db
 		#and redirect to session controller to ask user to sign in w pin
-		redirect_to root_path
+		redirect_to new_session_path
 	end
 
+
 	def forgot
+
+
 		#if user already exists,
 		#attempt to send txt to user
 		#and redirect to session controller to ask user to sign in w pin
+	end
+
+	def resend
+		n = params[:phone]
+		u = User.where(phone: n).first
+		if u
+			pin = text_pin_to_user(n)
+			u.update(pin: pin)
+			flash[:notice] = "New PIN sent"
+			redirect_to new_session_path
+		end
+
 	end
 
 	def destroy

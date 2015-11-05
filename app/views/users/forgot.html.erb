@@ -1,0 +1,7 @@
+<h1> Forgot your pin? </h1>
+
+
+<%= form_tag("/resend", method: "get") do %>
+<%= text_field_tag(:phone, '', :placeholder => "Your phone number") %>
+<%= submit_tag("Get a new PIN") %>
+<% end %>
