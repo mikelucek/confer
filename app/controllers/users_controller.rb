@@ -4,18 +4,39 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		pin = text_pin_to_user(params[:user][:phone])
 
-		if pin
-			u = User.new(phone: params[:user][:phone], pin: pin, email: params[:user][:email])
+		u = User.new(phone: params[:user][:phone], email: params[:user][:email])
+		if u.valid?
+			pin = text_pin_to_user(params[:user][:phone])
+			u.pin = pin
 			u.save
+			flash[:notice] = "account created. check phone for your PIN."
+			redirect_to new_session_path
+		else
+			flash[:notice] = "invalid phone number. try again."
+			redirect_to new_user_path
 		end
+	end
+			
+		# pin = text_pin_to_user(params[:user][:phone])
 
+		# if pin
+		# 	u = User.new(phone: params[:user][:phone], pin: pin, email: params[:user][:email])
+		# 	if u.save
+		# 		flash[:notice] = "account created. check your phone for your PIN."
+		# 		redirect_to new_session_path
+		# 	else
+		# 		flash[:notice] = "invalid phone number. try again."
+		# 		redirect_to new_user_path
+		# 	end
+		# else
+		# 	flash[:notice] = "your PIN failed to send. Try signing up again."
+		# 	redirect_to new_user_path
+		# end
 		#attempt to send txt to the user
 		#on success, save phone and pin to db
 		#and redirect to session controller to ask user to sign in w pin
-		redirect_to new_session_path
-	end
+
 
 
 	def forgot

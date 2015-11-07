@@ -1,7 +1,10 @@
 <h1>Results</h1>
 
+<% if !@feed.nil? %>
+<%= @feed.entries.count %> conferences!
 <% @feed.entries.each do |x| %>
 <p>
-<%= x.title %>
+<%= x.title %> <%= link_to "i'm going to this conference", members_conference_signup_path(:conference_id => x.id, :conference_title => x.title) %>
 </p>
+<% end %>
 <% end %>
