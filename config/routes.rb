@@ -2,9 +2,8 @@ Rails.application.routes.draw do
 
   root "home#index"  
 
-  get 'calls/setup'
-
-  get 'texts/setup'
+  get '/calls/setup', to: 'calls#setup', as: :new_call
+  get '/texts/setup', to: 'texts#setup', as: :new_text
 
   get '/signin', to: 'sessions#new', as: :new_session
   get '/signout', to: 'sessions#destroy', as: :destroy_session

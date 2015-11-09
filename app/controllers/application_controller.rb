@@ -8,4 +8,16 @@ class ApplicationController < ActionController::Base
   		@twilio_number = Rails.application.secrets.twilio_number
   	end
   end
+
+  def find_my_friend(user_id)
+  	a = Connection.where(user_id: user_id).first
+  	if !a.nil?
+  		return User.find(a.friend_id)
+  	end
+  	b = Connection.where(friend_id: user_id).first
+  	if !b.nil?
+  		return User.find(b.user_id)
+  	end
+  	return nil
+  end
 end
