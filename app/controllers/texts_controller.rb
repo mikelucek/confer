@@ -10,6 +10,21 @@ class TextsController < ApplicationController
   	# else
   	# 	find friend's phone number.
   	# 	forward the txt.
+    from = params['From'][-10, 10]
+    body = params['Body']
+    user = User.where(phone: from).first
+    if user.nil?
+      message = "You do not have an account on the service"
+      sms_message(message, from)
+    else
+      friend = find_my_friend(user.id)
+      if !friend.nil?
+        sms_message(body, friend.phone)
+      else
+        message = "You do not currently have a buddy on the system."
+        sms_message(message, from)
+      end
+    end
 
   end
 end

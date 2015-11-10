@@ -98,24 +98,6 @@ end
 
 
 
-def current_user_or_sign_in
-	if session[:id]
-		@user = User.find(session[:id])
-	else
-		redirect_to new_session_path
-	end
 
-end
-
-def sms_message(message, phone)
-	@client = Twilio::REST::Client.new 
-		message = @client.account.messages.create(
-			:from => twilio_number,
-			:to => phone,
-			:body => message
-		)
-
-	puts message.to
-end
 
 end
