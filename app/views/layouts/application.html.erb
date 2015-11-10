@@ -9,6 +9,29 @@
 <body>
 
 <%= flash[:notice] if flash[:notice] %>
+<header class="navbar navbar-fixed-top navbar-inverse" >
+	<div class = "container">
+	<ul class="nav navbar-nav navbar-right">
+	<% if session[:id].nil? %>
+<li>
+	<%= link_to("Sign in", :new_session) %>
+</li>
+<li>
+	<%= link_to("Sign up", :create_user) %>
+</li>
+<% else %>
+<li>
+	<%= link_to("Reset PIN", :forgot_user) %>
+</li>
+<li>
+	<%= link_to("Find a conference", :members_search) %>
+</li>
+<li>
+	<%= link_to("Sign out", :destroy_session) %>
+<% end %>
+</ul>
+</div>
+</header>
 
 <%= yield %>
 

@@ -12,7 +12,8 @@ Rails.application.routes.draw do
 
   resources :users
   get '/forgot', to: 'users#forgot', as: :forgot_user
-  get '/signup', to: 'users#new'
+  get '/resend', to: 'users#resend'
+  get '/signup', to: 'users#new', as: :create_user
 
   get '/members', to: 'members#index', as: :members_root
   get '/members-search', to: 'members#search', as: :members_search

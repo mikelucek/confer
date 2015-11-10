@@ -2,6 +2,18 @@ class MembersController < ApplicationController
   def index
   	#main landing page
   	current_user_or_sign_in
+  	@c = Conference.where(user_id: session[:id]).last
+  	if !@c.nil?
+  		@conference = @c.conference_description
+  	else
+  		@conference = "You are not signed up for a conference"
+  	end
+  	@f = find_my_friend(session[:id])
+  	if !@f.nil?
+  		@friend = "You have a friend for this session"
+  	else
+  		@friend = "You do not yet have a friend for this session"
+  	end
   
   end
 

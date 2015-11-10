@@ -7,11 +7,13 @@ class SessionsController < ApplicationController
 		#sign in a user
 		u = User.where(phone: params[:phone]).first
 		if u
-
 			if params[:pin] == u.pin
 				session[:id] = u.id
 				flash[:notice] = "Signed in with #{u.phone}"
 				redirect_to members_root_path
+			else
+				flash[:notice] = "Invalid phone or PIN"
+			redirect_to new_session_path
 			end
 		else
 	
