@@ -2,6 +2,10 @@ class MembersController < ApplicationController
   def index
   	#main landing page
   	current_user_or_sign_in
+
+  	#get ready to show some sidebar stats
+  	@recent_conferences = Conference.group(:conference_description).count
+
   	@c = Conference.where(user_id: session[:id]).last
   	if !@c.nil?
   		@conference = @c.conference_description
@@ -62,18 +66,20 @@ def conference_signup
 	#the new conference you picked:
 	conference_id = params[:conference_id]
 	conference_title = params[:conference_title]
+	conference_date = params[:conference_date]
+	conference_summary = params[:conference_summary]
 
 	#let's record it.
-	Conference.create(user_id: @user.id, conference_id: conference_id, conference_description: conference_title)
+	Conference.create(user_id: @user.id, conference_id: conference_id, conference_description: conference_title, conference_date: conference_date, conference_summary: conference_summary)
 
 
 	#if we have a previous friendship, let's get rid of it. Current user could be on either side of a connection, so let's check both sides: 
 	a = Connection.where("user_id = ? or friend_id = ?", @user.id, @user.id).first
 	if a
 		recipient = User.find(a.user_id)
-		sms_message("You have been unlinked", recipient.phone)
+		sms_message("(*Confer*) You have been unlinked", recipient.phone)
 		recipient = User.find(a.friend_id)
-		sms_message("You have been unlinked", recipient.phone)
+		sms_message("(*Confer*) You have been unlinked", recipient.phone)
 		a.destroy
 	end
 
@@ -88,8 +94,8 @@ def conference_signup
 		if a.empty?
 			Connection.create(user_id: @user.id, friend_id: x.user_id)
 			recipient = User.find(x.user_id)
-			sms_message("You have been linked!", recipient.phone)
-			sms_message("You have been linked!", @user.phone)
+			sms_message("(*Confer*) You have been linked!", recipient.phone)
+			sms_message("(*Confer*) You have been linked!", @user.phone)
 			flash[:notice] = "You have been linked!"
 			break
 		end

@@ -1,12 +1,18 @@
-<h1>Members#index</h1>
-<p>Find me in app/views/members/index.html.erb</p>
 
-<h1> <%= @conference %> </h1>
-<h1> <%= @friend %> </h1>
-
-Here is some stuff that a signed in member can do.
--look at the current sign-up-for conference
--see if linked or not
--unlink if desired
--search for conferences
--sign up for a conference
+<div class="row">
+	<div class ="col-md-8">
+		<h1> <%= @conference %> </h1>
+		<h1> <%= @friend %> </h1>
+	</div>
+	<div class="col-md-4">
+		<h2>Recent signups</h2>
+		<ul class="list-group">
+			<%= @recent_conferences.each do |key, value| %>
+				<li class="list-group-item">
+				<span class="badge"><%= value%></span>
+				 <%= key %>
+				</li> 
+			<% end %>
+		</ul>
+	</div>
+</div>

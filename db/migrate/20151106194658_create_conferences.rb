@@ -4,6 +4,8 @@ class CreateConferences < ActiveRecord::Migration
       t.string :user_id
       t.string :conference_id
       t.string :conference_description
+      t.string :conference_summary
+      t.string :conference_date
 
       t.timestamps null: false
     end

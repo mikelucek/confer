@@ -1,4 +1,4 @@
-class TextsController < ApplicationController
+class TextsController < ApplicationController; layout false
   def setup
   	# on incoming txt, check for user.
   	# if no user, send error txt.
@@ -14,14 +14,14 @@ class TextsController < ApplicationController
     body = params['Body']
     user = User.where(phone: from).first
     if user.nil?
-      message = "You do not have an account on the service"
+      message = "(*Confer*) You do not have an account on the service."
       sms_message(message, from)
     else
       friend = find_my_friend(user.id)
       if !friend.nil?
         sms_message(body, friend.phone)
       else
-        message = "You do not currently have a buddy on the system."
+        message = "(*Confer*) You do not currently have a buddy on the system."
         sms_message(message, from)
       end
     end

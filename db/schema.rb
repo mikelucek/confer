@@ -17,6 +17,8 @@ ActiveRecord::Schema.define(version: 20151106194658) do
     t.string   "user_id"
     t.string   "conference_id"
     t.string   "conference_description"
+    t.string   "conference_summary"
+    t.string   "conference_date"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
