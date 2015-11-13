@@ -7,7 +7,7 @@
 	<div class="col-md-4">
 		<h2>Recent signups</h2>
 		<ul class="list-group">
-			<%= @recent_conferences.each do |key, value| %>
+			<% @recent_conferences.each do |key, value| %>
 				<li class="list-group-item">
 				<span class="badge"><%= value%></span>
 				 <%= key %>

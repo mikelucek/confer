@@ -8,7 +8,8 @@
 	<% title = title_and_date.first %>
 	<% date = title_and_date.last %>
 <p>
-<%= title %> - <%= date %> <%= link_to "i'm going to this conference", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary) %><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target='#<%= feed_modal_count %>' >Open Modal</button>
+<h2><%= title %><h2>
+	<h3><%= date %></h3> <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#<%= feed_modal_count %>' >details</button>
 
 <!-- Modal -->
 <div id= '<%= feed_modal_count %>' class="modal fade" role="dialog">
@@ -34,7 +35,11 @@
 <% end %>
 <% end %>
 
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<p>
+
+Can't find it here?
+
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Your Own</button>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -44,15 +49,30 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title">Submit Your Own Conference</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+      	<div class="input-group input-group-lg">
+      	<%= form_tag("/members-signup", method: "get") do %>
+		<%= text_field_tag(:conference_id, Time.now.nsec, :placeholder => "", :class => "none") %>
+
+		<%= text_field_tag(:conference_title, '', :placeholder => "title", :class => "form-control marg") %>
+
+		<%= text_field_tag(:conference_date, '', :placeholder => "dates", :class => "form-control marg") %>
+	
+		<%= text_area_tag(:conference_summary, '', :placeholder => "description", :class => "form-control marg") %>
+	
+		<%= submit_tag("Save Event Details", :class => "form-control marg btn btn-default") %>
+		<% end %>
+	
       </div>
+  	  </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
       </div>
     </div>
 
   </div>
 </div>
+
+</p>
