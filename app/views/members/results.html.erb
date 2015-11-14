@@ -1,5 +1,5 @@
 <h1>Results</h1>
-
+<div class="row">
 <% if !@feed.nil? %>
 <%= @feed.entries.count %> conferences!
 <% feed_modal_count = 0%>
@@ -8,9 +8,11 @@
 	<% title = title_and_date.first %>
 	<% date = title_and_date.last %>
 <p>
+<div class="col-md-4">
 <h2><%= title %><h2>
-	<h3><%= date %></h3> <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %><button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#<%= feed_modal_count %>' >details</button>
-
+	<h3><%= date %></h3> <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#<%= feed_modal_count %>' >details</button>
+	<hr>
+</div>
 <!-- Modal -->
 <div id= '<%= feed_modal_count %>' class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -34,12 +36,14 @@
 <%feed_modal_count+=1%>
 <% end %>
 <% end %>
+</div>
 
-<p>
 
-Can't find it here?
-
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add Your Own</button>
+<div class="row">
+	<div class="col-md-4 col-md-offset-8">
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">or add your own</button>
+	</div>
+</div>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -52,20 +56,28 @@ Can't find it here?
         <h4 class="modal-title">Submit Your Own Conference</h4>
       </div>
       <div class="modal-body">
-      	<div class="input-group input-group-lg">
+     
+      	
       	<%= form_tag("/members-signup", method: "get") do %>
 		<%= text_field_tag(:conference_id, Time.now.nsec, :placeholder => "", :class => "none") %>
+			<div class="form-group">	
+		<%= text_field_tag(:conference_title, '', :placeholder => "title", :class => "form-control") %>
+			</div>
+				
+			<div class="form-group">	
+		<%= text_field_tag(:conference_date, '', :placeholder => "dates", :class => "form-control") %>
+			</div>
+				
+			<div class="form-group">	
+		<%= text_area_tag(:conference_summary, '', :placeholder => "description", :class => "form-control") %>
+			</div>
 
-		<%= text_field_tag(:conference_title, '', :placeholder => "title", :class => "form-control marg") %>
-
-		<%= text_field_tag(:conference_date, '', :placeholder => "dates", :class => "form-control marg") %>
-	
-		<%= text_area_tag(:conference_summary, '', :placeholder => "description", :class => "form-control marg") %>
-	
-		<%= submit_tag("Save Event Details", :class => "form-control marg btn btn-default") %>
+			<div class="form-group">	
+		<%= submit_tag("Save Event Details", :class => "form-control btn btn-default") %>
+			</div>
 		<% end %>
+				
 	
-      </div>
   	  </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">cancel</button>
