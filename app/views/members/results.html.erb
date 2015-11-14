@@ -1,4 +1,13 @@
 <h1>Results</h1>
+
+<% if !@local_result.nil? %>
+<h1> Local Results </h1>
+<% @local_result.each do |x| %>
+<%= x.conference_description %>
+<% end %>
+<% end %>
+
+
 <div class="row">
 <% if !@feed.nil? %>
 <%= @feed.entries.count %> conferences!

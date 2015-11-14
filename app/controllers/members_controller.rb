@@ -30,19 +30,34 @@ class MembersController < ApplicationController
   def results
   	#show list of searched conferences
   	current_user_or_sign_in
+
+  	#look for local results
+  	if !params[:place].blank? && !params[:topic].blank?
+  		@local_result = Conference.where('conference_summary LIKE ? or conference_summary LIKE ?', "%" + params[:place] + "%", "%" + params[:topic] + "%").all
+  	elsif params[:place] && params[:topic].blank?
+  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:place] + "%")
+  	elsif params[:topic] && params[:place].blank?
+  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:topic] + "%")
+  	else
+  		@local_result = nil
+  	end
+
+
+
+  	#look for feed results
   	if !params[:place].blank? && !params[:topic].blank?
   		 #http://lanyrd.com/topics/startups/in/usa/feed/
-  		 url = "http://lanyrd.com/topics/#{params[:topic]}/in/#{params[:place]}/feed/"
+  		 url = "http://lanyrd.com/topics/#{params[:topic].downcase.gsub(" ", "-")}/in/#{params[:place].downcase.gsub(" ", "-")}/feed/"
   		 parser url
 
   	elsif params[:place] && params[:topic].blank?
   		#http://lanyrd.com/places/brighton/feed/
-  		url = "http://lanyrd.com/places/#{params[:place]}/feed/"
+  		url = "http://lanyrd.com/places/#{params[:place].downcase.gsub(" ", "-")}/feed/"
   		parser url
 
   	elsif params[:topic] && params[:place].blank?
   		#http://lanyrd.com/topics/nodejs/feed/
-  		url = "http://lanyrd.com/topics/#{params[:topic]}/feed/"
+  		url = "http://lanyrd.com/topics/#{params[:topic].downcase.gsub(" ", "-")}/feed/"
   		parser url
 
   	else
