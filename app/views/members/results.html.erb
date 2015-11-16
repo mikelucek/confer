@@ -1,32 +1,69 @@
-<h1>Results</h1>
 
+<div class="row">
 <% if !@local_result.nil? %>
-<h1> Local Results </h1>
+<h1>Popular Results </h1>
+
+<% local_result_count = 0 %>
 <% @local_result.each do |x| %>
-<%= x.conference_description %>
+	<div class="col-md-4">
+		<div class="panel panel-success">
+			<div class="panel-heading"><%= x.conference_description %></div>
+			<div class="panel-body"><%= x.conference_date %></div>
+			<div class="panel-footer">
+				<%= link_to "i'm going", members_conference_signup_path(:conference_id => x.conference_id, :conference_title => x.conference_description, :conference_date => x.conference_date, :conference_summary => x.conference_summary), :class => "btn btn-info btn-sm"  %> 
+				<button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#l<%= local_result_count %>' >details</button>
+			</div>
+		</div>
+	</div>
+
+	<!--local results modal -->
+	<div id= 'l<%= local_result_count %>' class="modal fade" role="dialog">
+  		<div class="modal-dialog">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal">&times;</button>
+       			 <h4 class="modal-title">&nbsp;</h4>
+      			</div>
+      <div class="modal-body">
+        <%= x.conference_summary.html_safe %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+	</div>
+	<% local_result_count += 1 %>
+
+
 <% end %>
 <% end %>
+</div> <!--end row -->
 
 
 <div class="row">
 <% if !@feed.nil? %>
-<%= @feed.entries.count %> conferences!
+<h1><%= @feed.entries.count %> public conferences!</h1>
+
 <% feed_modal_count = 0%>
 <% @feed.entries.each do |x| %>
 	<% title_and_date = x.title.rpartition(",") %>
 	<% title = title_and_date.first %>
 	<% date = title_and_date.last %>
-<p>
 <div class="col-md-4">
-<h2><%= title %><h2>
-	<h3><%= date %></h3> <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %> <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#<%= feed_modal_count %>' >details</button>
-	<hr>
+	<div class="panel panel-default">
+		<div class="panel-heading"><%= title %></div>
+		<div class="panel-body"><%= date %></div>
+		<div class="panel-footer">
+		 <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %> 
+		 <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target='#<%= feed_modal_count %>' >details</button>
+		</div>
+	</div>
 </div>
-<!-- Modal -->
+<!-- Modal for details -->
 <div id= '<%= feed_modal_count %>' class="modal fade" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -41,18 +78,23 @@
     </div>
 
   </div>
-</div>
+</div> <!--end details modal -->
 <%feed_modal_count+=1%>
 <% end %>
 <% end %>
-</div>
 
 
-<div class="row">
-	<div class="col-md-4 col-md-offset-8">
-<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">or add your own</button>
+<div class="col-md-4">
+<div class="panel panel-warning">
+	<div class="panel-heading">Creating a new conference?</div>
+	<div class="panel-body">You can tell us about it.</div>
+	<div class="panel-footer">
+		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">submit your own conference</button>
 	</div>
 </div>
+</div>
+</div> <!--end row -->
+
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -94,6 +136,4 @@
     </div>
 
   </div>
-</div>
-
-</p>
+</div> <!--end my modal -->

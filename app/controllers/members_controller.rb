@@ -33,11 +33,11 @@ class MembersController < ApplicationController
 
   	#look for local results
   	if !params[:place].blank? && !params[:topic].blank?
-  		@local_result = Conference.where('conference_summary LIKE ? or conference_summary LIKE ?', "%" + params[:place] + "%", "%" + params[:topic] + "%").all
+  		@local_result = Conference.where('conference_summary LIKE ? or conference_summary LIKE ?', "%" + params[:place] + "%", "%" + params[:topic] + "%").distinct
   	elsif params[:place] && params[:topic].blank?
-  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:place] + "%")
+  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:place] + "%").distinct
   	elsif params[:topic] && params[:place].blank?
-  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:topic] + "%")
+  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:topic] + "%").distinct
   	else
   		@local_result = nil
   	end
@@ -46,17 +46,17 @@ class MembersController < ApplicationController
 
   	#look for feed results
   	if !params[:place].blank? && !params[:topic].blank?
-  		 #http://lanyrd.com/topics/startups/in/usa/feed/
+  		 #basic feed format: http://lanyrd.com/topics/startups/in/usa/feed/
   		 url = "http://lanyrd.com/topics/#{params[:topic].downcase.gsub(" ", "-")}/in/#{params[:place].downcase.gsub(" ", "-")}/feed/"
   		 parser url
 
   	elsif params[:place] && params[:topic].blank?
-  		#http://lanyrd.com/places/brighton/feed/
+  		#basic feed format: http://lanyrd.com/places/brighton/feed/
   		url = "http://lanyrd.com/places/#{params[:place].downcase.gsub(" ", "-")}/feed/"
   		parser url
 
   	elsif params[:topic] && params[:place].blank?
-  		#http://lanyrd.com/topics/nodejs/feed/
+  		#basic feed format: http://lanyrd.com/topics/nodejs/feed/
   		url = "http://lanyrd.com/topics/#{params[:topic].downcase.gsub(" ", "-")}/feed/"
   		parser url
 
@@ -66,6 +66,7 @@ class MembersController < ApplicationController
   end
 
   def parser (url)
+  		#our feed might 404. So let's deal with that.
   	  	begin
   			@feed = Feedjira::Feed.fetch_and_parse url
   		rescue StandardError

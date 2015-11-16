@@ -55,6 +55,8 @@ class UsersController < ApplicationController
 			u.update(pin: pin)
 			flash[:notice] = "New PIN sent"
 			redirect_to new_session_path
+		else
+			redirect_to root_path
 		end
 
 	end
