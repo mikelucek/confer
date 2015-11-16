@@ -7,7 +7,7 @@
 <% @local_result.each do |x| %>
 	<div class="col-md-4">
 		<div class="panel panel-success">
-			<div class="panel-heading"><%= x.conference_description %></div>
+			<div class="panel-heading tall"><%= x.conference_description %></div>
 			<div class="panel-body"><%= x.conference_date %></div>
 			<div class="panel-footer">
 				<%= link_to "i'm going", members_conference_signup_path(:conference_id => x.conference_id, :conference_title => x.conference_description, :conference_date => x.conference_date, :conference_summary => x.conference_summary), :class => "btn btn-info btn-sm"  %> 
@@ -53,7 +53,7 @@
 	<% date = title_and_date.last %>
 <div class="col-md-4">
 	<div class="panel panel-default">
-		<div class="panel-heading"><%= title %></div>
+		<div class="panel-heading tall"><%= title %></div>
 		<div class="panel-body"><%= date %></div>
 		<div class="panel-footer">
 		 <%= link_to "i'm going", members_conference_signup_path(:conference_id => x.id, :conference_title => title, :conference_date => date, :conference_summary => x.summary), :class => "btn btn-info btn-sm"  %> 
@@ -86,7 +86,7 @@
 
 <div class="col-md-4">
 <div class="panel panel-warning">
-	<div class="panel-heading">Creating a new conference?</div>
+	<div class="panel-heading tall">Creating a new conference?</div>
 	<div class="panel-body">You can tell us about it.</div>
 	<div class="panel-footer">
 		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">submit your own conference</button>

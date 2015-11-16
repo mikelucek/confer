@@ -33,11 +33,11 @@ class MembersController < ApplicationController
 
   	#look for local results
   	if !params[:place].blank? && !params[:topic].blank?
-  		@local_result = Conference.where('conference_summary LIKE ? or conference_summary LIKE ?', "%" + params[:place] + "%", "%" + params[:topic] + "%").distinct
+  		@local_result = Conference.where('conference_summary LIKE ? or conference_summary LIKE ? or conference_description LIKE ? or conference_description LIKE ?', "%" + params[:place] + "%", "%" + params[:topic] + "%","%" + params[:place] + "%", "%" + params[:topic] + "%").group(:conference_id)
   	elsif params[:place] && params[:topic].blank?
-  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:place] + "%").distinct
+  		@local_result = Conference.where('conference_summary LIKE ? or conference_description LIKE ?', "%" + params[:place] + "%", "%" + params[:place] + "%").group(:conference_id)
   	elsif params[:topic] && params[:place].blank?
-  		@local_result = Conference.where('conference_summary LIKE ?', "%" + params[:topic] + "%").distinct
+  		@local_result = Conference.where('conference_summary LIKE ? or conference_description LIKE ?', "%" + params[:topic] + "%", "%" + params[:topic] + "%").group(:conference_id)
   	else
   		@local_result = nil
   	end
