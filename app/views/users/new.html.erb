@@ -1,7 +1,23 @@
-<h2> Sign up </h2>
 
-<%= form_for @user do |x| %>
-<%= x.text_field :phone, :placeholder => "Phone number" %>
-<%= x.text_field :email, :placeholder => "Email address" %>
-<%= x.submit :signup %>
-<% end %>
+<div class = "row">
+	<div class ="col-md-6 col-md-offset-3">
+		<%= form_for @user do |x| %>
+		<div class="panel panel-default">
+			<div class="panel-heading"><h1>sign up</h1></div>
+			<div class="panel-body">
+				<div class = "input-group input-group-lg">
+					<%= x.text_field :phone, :placeholder => "Phone", :class => "phonepin" %>
+				</div>
+				<div class = "input-group input-group-lg">
+					<%= x.text_field :email, :placeholder => "Email (optional)", :class => "phonepin" %>
+				</div>
+			</div>
+			<div class ="panel-footer">
+					<%= x.submit :signup, :class => "btn btn-info btn-lg" %>
+					<% end %>
+			</div>
+		</div>
+	</div>
+</dov>
+
+

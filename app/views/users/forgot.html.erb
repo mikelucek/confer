@@ -1,7 +1,19 @@
-<h1> Forgot your pin? </h1>
 
 
-<%= form_tag("/resend", method: "get") do %>
-<%= text_field_tag(:phone, '', :placeholder => "Your phone number") %>
-<%= submit_tag("Get a new PIN") %>
-<% end %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<div class="panel panel-default">
+			<div class="panel-heading"><h1>reset your PIN</h1></div>
+			<div class="panel-body">
+				<%= form_tag("/resend", method: "get") do %>
+				<div class ="input-group input-group-lg">
+					<%= text_field_tag(:phone, '', :placeholder => "your phone number", :class => "phonepin") %>
+				</div>
+			</div>
+			<div class ="panel-footer">
+				<%= submit_tag("Get a new PIN", :class => "btn btn-info btn-lg") %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

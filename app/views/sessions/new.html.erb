@@ -1,13 +1,27 @@
-<h1> Sign In </h1>
 
+<div class = "row">
+	<div class = "col-md-6 col-md-offset-3">
+		<%= form_tag("/create", method: "get") do %>
+		<div class="panel panel-default">
+			<div class="panel-heading"><h1>sign in</div>
+			<div class="panel-body">
+				<div class="input-group input-group-lg">
+				<%= text_field_tag(:phone, '', :placeholder => "your phone number", :class => "phonepin") %>
+				</div>
+				<div class="input-group input-group-lg">
+				<%= text_field_tag(:pin,'', :placeholder => "your PIN", :class => "phonepin") %>
+				</div>
 
-<%= form_tag("/create", method: "get") do %>
-<%= text_field_tag(:phone, '', :placeholder => "sign in with your phone", :class => "phonepin center") %>
-<%= text_field_tag(:pin,'', :placeholder => "enter your PIN", :class => "phonepin center") %>
-<%= submit_tag("Log In", :class => "phonepin center") %>
-<% end %>
+			</div>
+			<div class="panel-footer"><%= submit_tag("Log In", :class => "btn btn-info btn-lg") %>
+			<% end %>
+			<%= link_to("reset PIN", :forgot_user, :class => "btn btn-info btn-lg") %></div>
+		</div>
+	</div>
 </div>
 
-<h2>Forgot your PIN?</h2>
 
-<%= link_to("Get a new one", :forgot_user) %>
+
+
+
+

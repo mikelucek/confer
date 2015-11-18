@@ -13,7 +13,7 @@
 			<% @recent_conferences.each do |key, value| %>
 				<li class="list-group-item">
 				<span class="badge"><%= value%></span>
-				 <%= key %>
+				 <%= link_to key, members_results_path(topic: key) %>
 				</li> 
 			<% end %>
 		</ul>

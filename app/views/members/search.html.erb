@@ -1,9 +1,24 @@
-<h1> Search for a conference </h1>
 
-topic or city. or both.
 
-<%= form_tag("/members-results", method: "get") do %>
-<%= text_field_tag(:place, '', :placeholder => "location") %>
-<%= text_field_tag(:topic,'', :placeholder => "topic") %>
-<%= submit_tag("Search") %>
-<% end %>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3">
+		<%= form_tag("/members-results", method: "get") do %>
+		<div class="panel panel-deafult">
+			<div class = "panel-heading"><h1>find a conference</h1></div>
+			<div class = "panel-body">
+				
+				<div class="input-group input-group-lg">
+					<%= text_field_tag(:place, '', :placeholder => "location", :class => "phonepin") %>
+				</div>
+				<small>and/or</small>
+				<div class="input-group input-group-lg">					
+					<%= text_field_tag(:topic,'', :placeholder => "topic", :class => "phonepin") %>
+				</div>
+			</div>
+			<div class ="panel-footer">
+				<%= submit_tag("Search", :class => "btn btn-info btn-lg") %>
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>

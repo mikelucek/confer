@@ -7,6 +7,7 @@
 
 body {
   padding-top: 60px;
+  background-color: #eee;
 }
 
 section {
@@ -29,8 +30,7 @@ textarea {
 	display: block;
 	font-size: 3em;
 	padding: 14px;
-	margin: 14px;
-	border-radius: 14px;
+	margin: 14px auto;
 }
 
 .none{
@@ -45,3 +45,8 @@ textarea {
 .tall{
 	height: 70px;
 }
+
+/////////////////////
+/// sign in and up forms
+////////////////////
+
