@@ -3,8 +3,7 @@ class CallsController < ApplicationController; layout false
 
 
   	from = params['From'][-10, 10]
-  	puts "*************"
-  	puts from
+
   	user = User.where(phone: from).first
   	if user.nil?
   		 @call_response = Twilio::TwiML::Response.new do |r|
@@ -31,14 +30,7 @@ class CallsController < ApplicationController; layout false
   			render xml: @call_response
   		end
   	end
-  	# on incoming call,
-  	# check for user in database.
-  	# if no user, say error message.
-  	# check for friendship.
-  	# if no friendship, say error message.
-  	# if friendship, find friend's phone number
-  	# call friend. bridge the call.
-
+  
   end
 end
 
