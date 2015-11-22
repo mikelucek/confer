@@ -3,9 +3,35 @@
 	<div class ="col-md-8">
 		<div class="panel panel-danger">
 			 <div class="panel-heading"><h1><%= @conference %></H1> </div>
-		<div class ="panel-body"><%= @friend %></div>
-		<div class ="panel-footer"><h1><%= @contact_text %></h1></div>
-	</div>
+			<div class ="panel-body"><%= @friend_text %></div>
+			<div class ="panel-footer"><h1><%= @contact_text %></h1></div>
+		</div>
+
+		<div class="panel panel-danger">
+			<div class="panel-heading"><h1>chat</h1></div>
+			<div class="panel-body">
+				<div id = "chat">chats from your friend show up here.</div>
+			</div>
+			<div class="panel-footer">
+				<div class = "row">
+				<% if !@friend.nil? %>
+				<%= form_tag("/new-message", method: "get", :remote => true) %>
+				<%= text_field_tag(:user_id, @user.id, :class => "none") %>
+				<%= text_field_tag(:friend_id, @friend.id, :class => "none") %>
+				<div class="col-sm-10">
+					<div class = "form-group">
+					<%= text_field_tag(:message, "", :placeholder => "message", :class => "chat-message form-control") %>
+					</div>
+				</div>
+				<div class="col-sm-1">
+				<%= submit_tag("send", :class => "chat-submit btn btn-default btn-small") %>
+				</div>
+				</div>
+				<% end %>
+			</div>
+		</div>
+
+
 	</div>
 	<div class="col-md-4">
 		<h2>Recent signups</h2>

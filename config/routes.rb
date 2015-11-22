@@ -19,6 +19,9 @@ Rails.application.routes.draw do
   get '/members-search', to: 'members#search', as: :members_search
   get '/members-results', to: 'members#results', as: :members_results
   get '/members-signup', to: 'members#conference_signup', as: :members_conference_signup
+
+  get '/new-message', to: 'chats#new'
+  get '/show-message', to: 'chats#show'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

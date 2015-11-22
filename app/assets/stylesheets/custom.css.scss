@@ -16,6 +16,7 @@ section {
 
 textarea {
   resize: vertical;
+
 }
 
 .center {
@@ -44,6 +45,11 @@ textarea {
 
 .tall{
 	height: 70px;
+}
+
+#chat{
+	height: 200px;
+	overflow: scroll;
 }
 
 /////////////////////

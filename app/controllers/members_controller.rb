@@ -14,11 +14,13 @@ class MembersController < ApplicationController
   	end
   	@f = find_my_friend(session[:id])
   	if !@f.nil?
-  		@friend = "You have a friend for this session"
+  		@friend_text = "You have a friend for this session"
       @contact_text = "Call or txt 215.490.9443 to connect"
+      @friend = @f
   	else
-  		@friend = "You do not yet have a friend for this session"
+  		@friend_text= "You do not yet have a friend for this session"
       @contact_text = ""
+      @friend = nil
   	end
   
   end

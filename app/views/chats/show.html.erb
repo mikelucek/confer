@@ -1,0 +1,8 @@
+<% @messages.each do |x| %>
+	<% if x.user_id == session[:id] %>
+		<i>me:  <%= x.message %> </i><br/>
+	<% else %>
+		<b>friend: <%= x.message %></b><br/>
+	<% end %>
+
+<% end %>
