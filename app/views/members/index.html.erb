@@ -4,11 +4,11 @@
 		<div class="panel panel-danger">
 			 <div class="panel-heading"><h1><%= @conference %></H1> </div>
 			<div class ="panel-body"><%= @friend_text %></div>
-			<div class ="panel-footer"><h1><%= @contact_text %></h1></div>
+			<div class ="panel-footer"><h2><%= @contact_text %></h2></div>
 		</div>
 
-		<div class="panel panel-danger">
-			<div class="panel-heading"><h1>chat</h1></div>
+		<div class="panel panel-success">
+			<div class="panel-heading"><h2>chat</h2></div>
 			<div class="panel-body">
 				<div id = "chat">chats from your friend show up here.</div>
 			</div>
@@ -35,14 +35,19 @@
 
 	</div>
 	<div class="col-md-4">
-		<h2>Recent signups</h2>
-		<ul class="list-group">
-			<% @recent_conferences.each do |key, value| %>
+		<div class = "panel panel-default">
+			<div class ="panel-heading"><h2>Recent signups</h2></div>
+			<div class = "panel-body">
+				<ul class="list-group">
+				<% @recent_conferences.each do |key, value| %>
 				<li class="list-group-item">
 				<span class="badge"><%= value%></span>
 				 <%= link_to key, members_results_path(topic: key) %>
 				</li> 
-			<% end %>
-		</ul>
+				<% end %>
+				</ul>
+			</div>
+			<div class="panel-footer"> </div>
+		</div>
 	</div>
 </div>
