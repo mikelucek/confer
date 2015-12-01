@@ -1,28 +1,11 @@
-== README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Confer
 
-Things you may want to cover:
+Confer helps conect a conference attendee to one other person who is attending the same conference. Connections are made via voice, SMS, and chat.
 
-* Ruby version
+# Installing
 
-* System dependencies
+Confer needs a twilio account in order to work. It expects to see `account_sid`, `auth_token` and `twilio_number` in your `secrets.yml` file.
 
-* Configuration
+Additionally, it needs to be exposed to the internet in order to accept incoming calls. If you're running on a local machine, the very excellent [ngrok.com] could help with this.
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
