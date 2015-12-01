@@ -1,9 +1,9 @@
 
-# Confer
+#Confer
 
 Confer helps conect a conference attendee to one other person who is attending the same conference. Connections are made via voice, SMS, and chat.
 
-# Installing
+#Installing
 
 Confer needs a twilio account in order to work. It expects to see `account_sid`, `auth_token` and `twilio_number` in your `secrets.yml` file.
 
