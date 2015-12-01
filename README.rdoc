@@ -9,3 +9,5 @@ Confer needs a twilio account in order to work. It expects to see `account_sid`,
 
 Additionally, it needs to be exposed to the internet in order to accept incoming calls. If you're running on a local machine, the very excellent http://ngrok.com could help with this.
 
+See a live demo at http://confer.mike-lucek.com
+
